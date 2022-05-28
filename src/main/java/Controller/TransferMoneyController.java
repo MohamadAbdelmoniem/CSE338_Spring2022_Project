@@ -52,7 +52,7 @@ public class TransferMoneyController {
     void TransferButtonOnAction(ActionEvent event) {
 
     }
-    public void ValidateTransfer() {
+    public void ValidateTransfer()throws SQLException {
         String FirstAccount = AccountOneText.getText();
         String SecondAccount = AccountTwoText.getText();
         String Amount = AmountText.getText();
@@ -62,26 +62,29 @@ public class TransferMoneyController {
         int maxNumber = 10000000;
         int randomNumber = rand.nextInt(maxNumber) + 1;
         DatabaseConnection connectNow = new DatabaseConnection();
+        int fees= Integer.parseInt(AmountText.getText());
         Connection connectDB = connectNow.getConnection();
         String VertifyTransfer = "INSERT INTO world.transactions (`TransactionNumber`, `AccountNumber`, `FromToAccount`, `Amount`, `DebitCredit`, `Date`, `Description`) " +
                 "VALUES ('"+randomNumber+"', '"+ FirstAccount+"','"+ SecondAccount+"','"+Amount+"','"+"D"+"','"+Date+"','"+Description+"')";
-        //String GetBalance="SELECT Balance FROM `world`.`useraccount` where idUserAccount='"+FirstAccount+"'";
+        String GetBalance="SELECT Balance FROM `world`.`useraccount` where idUserAccount='"+FirstAccount+"'";
 
         try {
             Statement ss= connectDB.createStatement();
             ss.executeUpdate(VertifyTransfer);
             TransferMessage.setText("Validate");
-            /*Statement statement= connectDB.createStatement();
-            ResultSet queryResult= statement.executeQuery(GetBalance);
+            //try
+            Statement stmt =connectDB.createStatement(ResultSet.TYPE_SCROLL_SENSITIVE, ResultSet.CONCUR_UPDATABLE);
+            ResultSet queryResult= stmt.executeQuery(GetBalance);
             while (queryResult.next()) {
-                String UpdateBalance="UPDATE `world`.`useraccount` SET `Balance` = '"+(queryResult)+"' WHERE (`idUserAccount` = '"+FirstAccount+"')";
+                float f = queryResult.getFloat("Balance");
+                queryResult.updateFloat("Balance", f - fees);
+                queryResult.updateRow();
             }
-             */
-        }
-        catch (Exception e){
+            } catch (Exception e){
             e.printStackTrace();
+            }
         }
-    }
-}
+
+        }
 
 //world.useraccount

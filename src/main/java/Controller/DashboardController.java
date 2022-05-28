@@ -23,6 +23,9 @@ public class DashboardController {
     private Button TransferMoney;
 
     @FXML
+    private Button Register;
+
+    @FXML
     void PayBillsOnAction(ActionEvent event) {
         GoPayBills();
 

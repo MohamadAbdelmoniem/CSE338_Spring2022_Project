@@ -36,7 +36,7 @@
                         <Font size="13.0" />
                     </font>
                 </Button>
-                <Button fx:id="CancelButton" layoutX="229.0" layoutY="313.0" mnemonicParsing="false" onAction="#CancelButtonOnAction" prefHeight="30.0" prefWidth="271.0" style="-fx-background-color: #f28e1c;" text="Cancel " textFill="WHITE">
+                <Button fx:id="CancelButton" layoutX="229.0" layoutY="356.0" mnemonicParsing="false" onAction="#CancelButtonOnAction" prefHeight="30.0" prefWidth="271.0" style="-fx-background-color: #f28e1c;" text="Cancel " textFill="WHITE">
                     <font>
                         <Font size="13.0" />
                     </font>
@@ -47,6 +47,11 @@
                   <Image url="@Photos/The-Impact-of-Digital-Banking-During-the-Coronavirus-Pandemic-Featured-Blog-Image_Featured-Image.png" />
                </image>
             </ImageView>
+            <Button fx:id="Register" layoutX="229.0" layoutY="310.0" mnemonicParsing="false" onAction="#GoRegisterOnAction" prefHeight="30.0" prefWidth="271.0" style="-fx-background-color: #f28e1c;" text="New User? Register" textFill="WHITE">
+               <font>
+                  <Font size="13.0" />
+               </font>
+            </Button>
             </children>
         </AnchorPane>
    </top>

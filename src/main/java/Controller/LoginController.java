@@ -64,6 +64,11 @@ public class LoginController {
         }
 
     }
+
+    @FXML
+    void GoRegisterOnAction(ActionEvent event) {
+        GoRegister();
+    }
     @FXML
     private Button LoginButton;
 
@@ -79,6 +84,21 @@ public class LoginController {
             Scene scene = new Scene(fxmlLoader.load(), 697, 447);
             Stage stage=new Stage();
             stage.setTitle("Dashboard");
+            stage.setScene(scene);
+            stage.show();
+
+        }
+        catch (Exception e){
+            e.printStackTrace();
+        }
+
+    }
+    public void GoRegister(){
+        try{
+            FXMLLoader fxmlLoader = new FXMLLoader(HelloApplication.class.getResource("SignUp.fxml"));
+            Scene scene = new Scene(fxmlLoader.load(), 520, 383);
+            Stage stage=new Stage();
+            stage.setTitle("Sign Up");
             stage.setScene(scene);
             stage.show();
 
