@@ -8,6 +8,8 @@ import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.stage.Stage;
 
+import java.io.IOException;
+
 public class DashboardController {
 
     @FXML
@@ -60,7 +62,7 @@ public class DashboardController {
         }
 
     }
-    public void GoTransactionsHistory(){
+    public void GoTransactionsHistory() {
         try{
             FXMLLoader fxmlLoader = new FXMLLoader(HelloApplication.class.getResource("Transaction History.fxml"));
             Scene scene = new Scene(fxmlLoader.load(), 719, 447);

@@ -68,7 +68,6 @@ public class PayBillController {
                         ResultSet r= s.executeQuery(GetBalance);
                         r.next();
                          int Balance=r.getInt(1);
-                         //System.out.println(Balance);
                          Balance=Balance-TransactionAmount;
                         String UpBalance="UPDATE useraccount SET Balance='"+Balance+"'where idUserAccount='"+AccountNumber.getText()+"'";
                         Statement s2 = connectDB.createStatement();
