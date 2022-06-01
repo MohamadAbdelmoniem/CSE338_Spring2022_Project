@@ -63,6 +63,16 @@ public class PayBillController {
                         Statement ss = connectDB.createStatement();
                         ss.executeUpdate(InsertTransaction);
                         Status.setText("Bill Paid");
+                        String GetBalance="Select Balance FROM useraccount where idUserAccount='"+AccountNumber.getText()+"'";
+                        Statement s= connectDB.createStatement();
+                        ResultSet r= s.executeQuery(GetBalance);
+                        r.next();
+                         int Balance=r.getInt(1);
+                         //System.out.println(Balance);
+                         Balance=Balance-TransactionAmount;
+                        String UpBalance="UPDATE useraccount SET Balance='"+Balance+"'where idUserAccount='"+AccountNumber.getText()+"'";
+                        Statement s2 = connectDB.createStatement();
+                        s2.executeUpdate(UpBalance);
                     } else {
                         Status.setText("No Balance ");
                     }
