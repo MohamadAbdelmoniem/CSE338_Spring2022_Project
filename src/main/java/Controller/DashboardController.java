@@ -93,7 +93,7 @@ public class DashboardController {
     public void GoPayBills() {
         try {
             FXMLLoader fxmlLoader = new FXMLLoader(HelloApplication.class.getResource("PayBills.fxml"));
-            Scene scene = new Scene(fxmlLoader.load(), 517, 310);
+            Scene scene = new Scene(fxmlLoader.load(), 461, 400);
             Stage stage = new Stage();
             stage.setTitle("PayBills");
             stage.setScene(scene);

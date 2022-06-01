@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
 <?import javafx.scene.control.TableColumn?>
 <?import javafx.scene.control.TableView?>
 <?import javafx.scene.control.TextField?>
@@ -21,5 +22,6 @@
         </TableView>
         <TextField fx:id="SearchNumber" layoutX="14.0" layoutY="38.0" promptText="Account Number" />
         <Button layoutX="226.0" layoutY="38.0" mnemonicParsing="false" onAction="#ViewTransactions" prefHeight="25.0" prefWidth="149.0" text="View Transactions" />
+      <Label fx:id="BalanceMessage" alignment="CENTER" layoutX="409.0" layoutY="42.0" prefHeight="17.0" prefWidth="165.0" textFill="RED" />
     </children>
 </AnchorPane>

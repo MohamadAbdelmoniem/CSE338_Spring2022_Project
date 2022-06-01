@@ -36,7 +36,7 @@
             </ImageView>
          </children>
       </AnchorPane>
-      <Label fx:id="TransferMessage" layoutX="41.0" layoutY="275.0" prefHeight="17.0" prefWidth="59.0" textFill="#03b220" />
+      <Label fx:id="TransferMessage" alignment="CENTER" layoutX="14.0" layoutY="267.0" prefHeight="17.0" prefWidth="184.0" textFill="RED" />
       <Button fx:id="TransferButton" layoutX="223.0" layoutY="263.0" mnemonicParsing="false" onAction="#TransferMessageOnAction" text="Done" />
    </children>
 </AnchorPane>

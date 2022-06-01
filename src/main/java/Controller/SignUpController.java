@@ -9,6 +9,7 @@ import javafx.scene.control.TextField;
 import java.sql.*;
 
 public class SignUpController {
+    boolean found = false;
 
     @FXML
     private TextField CPass;
@@ -42,9 +43,9 @@ public class SignUpController {
     }
 
     void ValidateSignUp() throws SQLException {
+        boolean found1 = false;
         if (!FirstName.getText().isEmpty() && !Pass.getText().isEmpty() && !CPass.getText().isEmpty() && !ID.getText().isEmpty() && !LastName.getText().isEmpty() && !UserName.getText().isEmpty()) {
             if (CPass.getText().equals(Pass.getText())) {
-                boolean found = false;
                 DatabaseConnection connectNow = new DatabaseConnection();
                 Connection connectDB = connectNow.getConnection();
                 try {
@@ -71,6 +72,7 @@ public class SignUpController {
                     }
                 } else {
                     SignUpMesaage.setText("This ID is already used");
+                    SignUpMesaage.setText("This ID is already used");
                 }
             } else {
                 SignUpMesaage.setText("Password doesn't match");
@@ -79,4 +81,4 @@ public class SignUpController {
             SignUpMesaage.setText("Please provide all info");
         }
     }
-    }
+}

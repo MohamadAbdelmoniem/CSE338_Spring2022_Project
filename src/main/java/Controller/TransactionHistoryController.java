@@ -7,6 +7,7 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.scene.control.Label;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
@@ -42,6 +43,9 @@ public class TransactionHistoryController {
     private TableColumn<Transaction, String> Description;
 
     @FXML
+    private Label BalanceMessage;
+
+    @FXML
     private TableColumn<Transaction, String> FromToAccount;
 
     @FXML
@@ -53,65 +57,48 @@ public class TransactionHistoryController {
     }
 
     private void loadTables() throws SQLException {
-        DatabaseConnection connectNow= new DatabaseConnection();
-        Connection connectDB=connectNow.getConnection();
+        DatabaseConnection connectNow = new DatabaseConnection();
+        Connection connectDB = connectNow.getConnection();
         //String ShowHistory="SELECT * FROM world.transactions";
-        String ShowHistory="SELECT * FROM world.transactions WHERE AccountNumber='"+SearchNumber.getText()+ "'";
-        try {
-            Statement s = connectDB.createStatement();
-            ResultSet rs = s.executeQuery(ShowHistory);
-            list.clear();
-            while (rs.next()) {
-                String r1 = rs.getString("TransactionNumber");
-                String r2 = rs.getString("AccountNumber");
-                String r3 = rs.getString("FromToAccount");
-                String r4 = rs.getString("Amount");
-                String r5 = rs.getString("DebitCredit");
-                String r6 = rs.getString("Date");
-                String r7 = rs.getString("Description");
-                System.out.println(r5);
-                list.add(new Transaction(r1, r2, r3, r4, r5, r6, r7));
+        if (SearchNumber.getText().equals(LoginController.Flag)) {
+            String ShowHistory = "SELECT * FROM world.transactions WHERE AccountNumber='" + SearchNumber.getText() + "'";
+            try {
+                Statement s = connectDB.createStatement();
+                ResultSet rs = s.executeQuery(ShowHistory);
+                list.clear();
+                while (rs.next()) {
+                    String r1 = rs.getString("TransactionNumber");
+                    String r2 = rs.getString("AccountNumber");
+                    String r3 = rs.getString("FromToAccount");
+                    String r4 = rs.getString("Amount");
+                    String r5 = rs.getString("DebitCredit");
+                    String r6 = rs.getString("Date");
+                    String r7 = rs.getString("Description");
+                    list.add(new Transaction(r1, r2, r3, r4, r5, r6, r7));
+                }
+                TransactionRecord.getItems().clear();
+                TransactionRecord.getItems().addAll(list);
+                connectDB.close();
+                BalanceMessage.setText("This Page show All your recent Transactions");
+            } catch (SQLException e) {
+                e.printStackTrace();
             }
-            /*
-            TransactionNumber.setCellValueFactory(new PropertyValueFactory<>("TransactionNumber"));
-            AccountNumber.setCellValueFactory(new PropertyValueFactory<>("AccountNumber"));
-            FromToAccount.setCellValueFactory(new PropertyValueFactory<>("FromToAccount"));
-            Amount.setCellValueFactory(new PropertyValueFactory<>("Amount"));
-            DebitCredit.setCellValueFactory(new PropertyValueFactory<>("DebitCredit"));
-            Date.setCellValueFactory(new PropertyValueFactory<>("Date"));
-            Description.setCellValueFactory(new PropertyValueFactory<>("Description"));
-
-             */
-
-            System.out.println("ana hena");
-            TransactionRecord.getItems().clear();
-            System.out.println("ana hena");
-            TransactionRecord.getItems().addAll(list);
-            System.out.println("ana hena");
-            connectDB.close();
-            //TransactionRecord.getItems().addAll(list);
+        } else {
+            try {
+                BalanceMessage.setText("Wrong ID");
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
         }
-        catch (SQLException e){
-            e.printStackTrace();
-        }
-
     }
     @FXML
     void initialize() throws Exception {
         DatabaseConnection connectNow= new DatabaseConnection();
-
         Connection connectDB=connectNow.getConnection();
-
         Statement s = connectDB.createStatement();
-
         ResultSet rs = s.executeQuery("select * from world.transactions");
-
         ArrayList<String> Transactions = new ArrayList<>();
-
-
         initcol();
-
-
     }
     public void initcol() {
         TransactionNumber.setCellValueFactory(new PropertyValueFactory<>("TransactionNumber"));

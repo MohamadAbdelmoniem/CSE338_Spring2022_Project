@@ -52,19 +52,24 @@ public class PayBillController {
             Statement statement = connectDB.createStatement();
             ResultSet queryResult = statement.executeQuery(PayBill);
             int TransferAccountNumber;
-            if (ChooseBox.getValue()=="WE"){
-                TransferAccountNumber= 32421;
-            }
-            while (queryResult.next()) {
-                if (queryResult.getInt(1) > TransactionAmount) {
-                    String InsertTransaction = "INSERT INTO `world`.`transactions` (`TransactionNumber`, `AccountNumber`, `FromToAccount`, `Amount`, `DebitCredit`, `Date`, `Description`, `BillNumber`) " +
-                            "VALUES ('" + randomNumber + "','" + AccountNumber.getText() + "', '" + 333 + "', '" + TransactionAmount + "', '" + "D" + "', '" + java.time.LocalDate.now() + "', 'Paying Bill', '" + BillNumber.getText() + "')";
-                    Statement ss = connectDB.createStatement();
-                    ss.executeUpdate(InsertTransaction);
-                    Status.setText("Bill Paid");
-                } else {
-                    Status.setText("No Balance ");
+            if(AccountNumber.getText().equals(LoginController.Flag)) {
+                if (ChooseBox.getValue() == "WE") {
+                    TransferAccountNumber = 32421;
                 }
+                while (queryResult.next()) {
+                    if (queryResult.getInt(1) > TransactionAmount) {
+                        String InsertTransaction = "INSERT INTO `world`.`transactions` (`TransactionNumber`, `AccountNumber`, `FromToAccount`, `Amount`, `DebitCredit`, `Date`, `Description`, `BillNumber`) " +
+                                "VALUES ('" + randomNumber + "','" + AccountNumber.getText() + "', '" + 333 + "', '" + TransactionAmount + "', '" + "D" + "', '" + java.time.LocalDate.now() + "', 'Paying Bill', '" + BillNumber.getText() + "')";
+                        Statement ss = connectDB.createStatement();
+                        ss.executeUpdate(InsertTransaction);
+                        Status.setText("Bill Paid");
+                    } else {
+                        Status.setText("No Balance ");
+                    }
+                }
+            }
+            else{
+                Status.setText("Please enter correct ID");
             }
         } catch (Exception e) {
             e.printStackTrace();
@@ -73,6 +78,6 @@ public class PayBillController {
     }
     @FXML
     void initialize() {
-    ChooseBox.getItems().addAll("WE","Vodafone","Amazon","Orange");
+        ChooseBox.getItems().addAll("WE","Vodafone","Amazon","Orange");
     }
 }

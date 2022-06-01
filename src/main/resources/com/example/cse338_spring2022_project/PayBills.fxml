@@ -4,29 +4,47 @@
 <?import javafx.scene.control.ChoiceBox?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="256.0" prefWidth="406.0" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controller.PayBillController">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="461.0" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controller.PayBillController">
    <children>
-      <Label layoutX="24.0" layoutY="128.0" prefHeight="20.0" prefWidth="151.0" text="Enter Bill Number">
+      <Label alignment="CENTER" contentDisplay="CENTER" layoutX="66.0" layoutY="239.0" prefHeight="0.0" prefWidth="151.0" text="Enter Bill Number">
          <font>
             <Font size="14.0" />
          </font>
       </Label>
-      <TextField fx:id="BillNumber" layoutX="175.0" layoutY="126.0" />
-      <Label fx:id="Status" layoutX="14.0" layoutY="166.0" prefHeight="20.0" prefWidth="151.0" textFill="#ff0606">
+      <TextField fx:id="BillNumber" layoutX="233.0" layoutY="236.0" />
+      <Label fx:id="Status" alignment="CENTER" contentDisplay="CENTER" layoutX="60.0" layoutY="357.0" prefHeight="20.0" prefWidth="246.0" textFill="RED">
          <font>
             <Font size="14.0" />
          </font>
       </Label>
-      <Button fx:id="PayBill" layoutX="167.0" layoutY="163.0" mnemonicParsing="false" onAction="#StatusMassageOnAction" text="Pay Bill" />
-      <Label layoutX="25.0" layoutY="51.0" prefHeight="20.0" prefWidth="151.0" text="Enter Account Number">
+      <Button fx:id="PayBill" layoutX="328.0" layoutY="354.0" mnemonicParsing="false" onAction="#StatusMassageOnAction" text="Pay Bill" />
+      <Label alignment="CENTER" layoutX="66.0" layoutY="202.0" prefHeight="20.0" prefWidth="151.0" text="Enter Account Number">
          <font>
             <Font size="14.0" />
          </font>
       </Label>
-      <TextField fx:id="AccountNumber" layoutX="176.0" layoutY="49.0" />
-      <ChoiceBox fx:id="ChooseBox" layoutX="175.0" layoutY="88.0" prefWidth="150.0" />
+      <TextField fx:id="AccountNumber" layoutX="233.0" layoutY="200.0" />
+      <ChoiceBox fx:id="ChooseBox" layoutX="232.0" layoutY="274.0" prefWidth="150.0" />
+      <ImageView fitHeight="162.0" fitWidth="215.0" layoutX="150.0" layoutY="18.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@Photos/shop-now-icon.png" />
+         </image>
+      </ImageView>
+      <Label alignment="CENTER" contentDisplay="CENTER" layoutX="63.0" layoutY="277.0" prefHeight="0.0" prefWidth="151.0" text="Chosse Provider">
+         <font>
+            <Font size="14.0" />
+         </font>
+      </Label>
+      <Label alignment="CENTER" contentDisplay="CENTER" layoutX="47.0" layoutY="316.0" prefHeight="20.0" prefWidth="183.0" text="Saller Account Number">
+         <font>
+            <Font size="14.0" />
+         </font>
+      </Label>
+      <TextField fx:id="SallerAccount" alignment="CENTER" layoutX="234.0" layoutY="313.0" promptText="Type Only if Others " />
    </children>
 </AnchorPane>

@@ -9,7 +9,6 @@ import javafx.scene.control.TextField;
 
 import java.sql.Connection;
 import java.sql.ResultSet;
-import java.sql.SQLException;
 import java.sql.Statement;
 
 public class ShowBalanceController {
@@ -33,27 +32,19 @@ public class ShowBalanceController {
     public void ShowBalance(){
         DatabaseConnection connectNow= new DatabaseConnection();
         Connection connectDB=connectNow.getConnection();
-        String VertifyID="SELECT count(1) FROM world.useraccount WHERE idUserAccount='"+AccountNumberText.getText()+
-                "'";
         try{
-            Statement statement= connectDB.createStatement();
-            ResultSet queryResult= statement.executeQuery(VertifyID);
-            while (queryResult.next()){
-                if (queryResult.getInt(1)==1){
-                    String Balance="SELECT Balance FROM world.useraccount WHERE idUserAccount='"+AccountNumberText.getText()+"'";
-                    Statement ss= connectDB.createStatement();
-                    ResultSet r= ss.executeQuery(Balance);
-                    r.next();
-                    BalanceMessage.setText(r.getString(1));
-                }
-                else{
-                    BalanceMessage.setText("Wrong Account Number");
-
-                }
+            if(AccountNumberText.getText().equals(LoginController.Flag)) {
+                        String Balance = "SELECT Balance FROM world.useraccount WHERE idUserAccount='" + AccountNumberText.getText() + "'";
+                        Statement ss = connectDB.createStatement();
+                        ResultSet r = ss.executeQuery(Balance);
+                        r.next();
+                        BalanceMessage.setText(r.getString(1));
+                    }
+            else{
+                BalanceMessage.setText("Please enter correct ID");
             }
         } catch (Exception e){
             e.printStackTrace();
         }
-
     }
 }

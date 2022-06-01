@@ -20,6 +20,7 @@ import java.sql.Statement;
 import java.util.Objects;
 
 public class LoginController {
+    static String Flag;
 
     @FXML
     private Button CancelButton;
@@ -50,7 +51,14 @@ public class LoginController {
             ResultSet queryResult= statement.executeQuery(VertifyLogin);
             while (queryResult.next()){
                 if (queryResult.getInt(1)==1){
+                    String ID="SELECT idUserAccount FROM world.useraccount WHERE Username='"+UsernameTextField.getText()+"'";
+                    Statement ss= connectDB.createStatement();
+                    ResultSet r= ss.executeQuery(ID);
+                    r.next();
+                    Flag=r.getString(1);
+                    System.out.println(Flag);
                     GoDashbaord();
+                    //try to male the account number valid acroos the procees
                     //LoginMessage.setText("Welcome!");
                     //dashbaordlogin();
                 }
