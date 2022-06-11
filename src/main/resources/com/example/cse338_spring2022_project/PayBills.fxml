@@ -32,7 +32,7 @@
       <ChoiceBox fx:id="ChooseBox" layoutX="232.0" layoutY="274.0" prefWidth="150.0" />
       <ImageView fitHeight="162.0" fitWidth="215.0" layoutX="150.0" layoutY="18.0" pickOnBounds="true" preserveRatio="true">
          <image>
-            <Image url="@Photos/shop-now-icon.png" />
+            <Image url="@../../../../../../../CSE338_Spring2022_Project-master/src/main/resources/com/example/cse338_spring2022_project/Photos/shop-now-icon.png" />
          </image>
       </ImageView>
       <Label alignment="CENTER" contentDisplay="CENTER" layoutX="63.0" layoutY="277.0" prefHeight="0.0" prefWidth="151.0" text="Chosse Provider">

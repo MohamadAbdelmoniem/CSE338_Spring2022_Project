@@ -6,15 +6,14 @@ import java.sql.SQLException;
 
 import static org.junit.jupiter.api.Assertions.*;
 
-/*class SignUpControllerTest {
+class SignUpControllerTest {
     @Test
     public void test1() throws SQLException {
         SignUpController test1 = new SignUpController();
-
         test1.FirstName1="Mohamad";
         test1.LastName1="Ahmed";
         test1.ID1="17112000";
-        test1.UserName1="Man3om";
+        test1.UserName1="Man3om__";
         test1.Pass1="123";
         test1.CPass1="123";
         assertEquals("This ID is already used",test1.ValidateSignUp());
@@ -23,10 +22,10 @@ import static org.junit.jupiter.api.Assertions.*;
     public void test2() throws SQLException {
         SignUpController test2 = new SignUpController();
 
-        test2.FirstName1="Ahmed";
-        test2.LastName1="Hatem";
-        test2.ID1="0532142";
-        test2.UserName1="Hatoma";
+        test2.FirstName1="Ziad";
+        test2.LastName1="Assem";
+        test2.ID1="2131334";
+        test2.UserName1="Ziad__";
         test2.Pass1="123";
         test2.CPass1="123";
         assertEquals("User have successfully sign up!",test2.ValidateSignUp());
@@ -48,14 +47,14 @@ import static org.junit.jupiter.api.Assertions.*;
         SignUpController test4 = new SignUpController();
         test4.FirstName1="Ahmed";
         test4.LastName1="Youssef";
-        test4.ID1="032131";
+        test4.ID1="126712";
         test4.UserName1="Yous";
         test4.Pass1="1234";
         test4.CPass1="123";
         assertEquals("Password doesn't match",test4.ValidateSignUp());
         test4.FirstName1="Ahmed";
         test4.LastName1="Youssef";
-        test4.ID1="032131";
+        test4.ID1="126712";
         test4.UserName1="Yous";
         test4.Pass1="123";
         test4.CPass1="123";
@@ -63,4 +62,3 @@ import static org.junit.jupiter.api.Assertions.*;
 
     }
 }
- */

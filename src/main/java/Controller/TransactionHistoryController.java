@@ -19,6 +19,8 @@ import java.util.Date;
 import java.util.logging.Logger;
 
 public class TransactionHistoryController {
+    String AccountNumber1;
+    String Massage;
 
     ObservableList<Transaction> list = FXCollections.observableArrayList();
     @FXML
@@ -56,12 +58,12 @@ public class TransactionHistoryController {
 
     }
 
-    private void loadTables() throws SQLException {
+    String loadTables() throws SQLException {
         DatabaseConnection connectNow = new DatabaseConnection();
         Connection connectDB = connectNow.getConnection();
         //String ShowHistory="SELECT * FROM world.transactions";
-        if (SearchNumber.getText().equals(LoginController.Flag)) {
-            String ShowHistory = "SELECT * FROM world.transactions WHERE AccountNumber='" + SearchNumber.getText() + "'";
+        if (AccountNumber1.equals(LoginController.Flag)) {
+            String ShowHistory = "SELECT * FROM world.transactions WHERE AccountNumber='" + AccountNumber1 + "'";
             try {
                 Statement s = connectDB.createStatement();
                 ResultSet rs = s.executeQuery(ShowHistory);
@@ -76,20 +78,21 @@ public class TransactionHistoryController {
                     String r7 = rs.getString("Description");
                     list.add(new Transaction(r1, r2, r3, r4, r5, r6, r7));
                 }
-                TransactionRecord.getItems().clear();
-                TransactionRecord.getItems().addAll(list);
+                //TransactionRecord.getItems().clear();
+                //TransactionRecord.getItems().addAll(list);
                 connectDB.close();
-                BalanceMessage.setText("This Page show All your recent Transactions");
+                Massage=("This Page show All your recent Transactions");
             } catch (SQLException e) {
                 e.printStackTrace();
             }
         } else {
             try {
-                BalanceMessage.setText("Wrong ID");
+                Massage=("Wrong ID");
             } catch (Exception e) {
                 e.printStackTrace();
             }
         }
+        return Massage;
     }
     @FXML
     void initialize() throws Exception {

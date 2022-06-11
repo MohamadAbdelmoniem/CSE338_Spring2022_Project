@@ -18,7 +18,7 @@
       <TextField fx:id="CPass" layoutX="327.0" layoutY="279.0" promptText="Confirm Password" />
       <ImageView fitHeight="289.0" fitWidth="292.0" layoutX="21.0" layoutY="56.0" pickOnBounds="true" preserveRatio="true">
          <image>
-            <Image url="@Photos/Reg-online.png" />
+            <Image url="@../../../../../../../CSE338_Spring2022_Project-master/src/main/resources/com/example/cse338_spring2022_project/Photos/Reg-online.png" />
          </image>
       </ImageView>
       <Label alignment="CENTER" layoutX="150.0" layoutY="14.0" prefHeight="17.0" prefWidth="221.0" text=" Register Page">

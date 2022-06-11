@@ -17,6 +17,10 @@ import java.util.Date;
 import java.util.Random;
 
 public class PayBillController {
+    String Account1;
+    String BillNumber1;
+    int Amount;
+    String Message;
 
     @FXML
     private TextField AccountNumber;
@@ -36,54 +40,54 @@ public class PayBillController {
     private Label Status;
 
     @FXML
-    void StatusMassageOnAction(ActionEvent event) throws SQLException {
+    void StatusMassageOnAction() throws SQLException {
         PayBill();
     }
 
-    private void PayBill() throws SQLException {
+    String PayBill() throws SQLException {
         DatabaseConnection connectNow = new DatabaseConnection();
         Connection connectDB = connectNow.getConnection();
-        int TransactionAmount = 100;
         Random rand = new Random();
         int maxNumber = 10000000;
         int randomNumber = rand.nextInt(maxNumber) + 1;
-        String PayBill = "SELECT Balance FROM `world`.`useraccount` where idUserAccount='"+AccountNumber.getText()+"'";
+        String PayBill = "SELECT Balance FROM `world`.`useraccount` where idUserAccount='"+Account1+"'";
         try {
             Statement statement = connectDB.createStatement();
             ResultSet queryResult = statement.executeQuery(PayBill);
             int TransferAccountNumber;
-            if(AccountNumber.getText().equals(LoginController.Flag)) {
-                if (ChooseBox.getValue() == "WE") {
+            if(Account1.equals(LoginController.Flag)) {
+                /*if (ChooseBox.getValue() == "WE") {
                     TransferAccountNumber = 32421;
                 }
+                 */
                 while (queryResult.next()) {
-                    if (queryResult.getInt(1) > TransactionAmount) {
+                    if (queryResult.getInt(1) > Amount) {
                         String InsertTransaction = "INSERT INTO `world`.`transactions` (`TransactionNumber`, `AccountNumber`, `FromToAccount`, `Amount`, `DebitCredit`, `Date`, `Description`, `BillNumber`) " +
-                                "VALUES ('" + randomNumber + "','" + AccountNumber.getText() + "', '" + 333 + "', '" + TransactionAmount + "', '" + "D" + "', '" + java.time.LocalDate.now() + "', 'Paying Bill', '" + BillNumber.getText() + "')";
+                                "VALUES ('" + randomNumber + "','" + Account1+ "', '" + 356218 + "', '" + Amount + "', '" + "D" + "', '" + java.time.LocalDate.now() + "', 'Paying Bill', '" + BillNumber1 + "')";
                         Statement ss = connectDB.createStatement();
                         ss.executeUpdate(InsertTransaction);
-                        Status.setText("Bill Paid");
-                        String GetBalance="Select Balance FROM useraccount where idUserAccount='"+AccountNumber.getText()+"'";
+                        Message=("Bill Paid");
+                        String GetBalance="Select Balance FROM useraccount where idUserAccount='"+Account1+"'";
                         Statement s= connectDB.createStatement();
                         ResultSet r= s.executeQuery(GetBalance);
                         r.next();
                          int Balance=r.getInt(1);
-                         Balance=Balance-TransactionAmount;
-                        String UpBalance="UPDATE useraccount SET Balance='"+Balance+"'where idUserAccount='"+AccountNumber.getText()+"'";
+                         Balance=Balance-Amount;
+                        String UpBalance="UPDATE useraccount SET Balance='"+Balance+"'where idUserAccount='"+Account1+"'";
                         Statement s2 = connectDB.createStatement();
                         s2.executeUpdate(UpBalance);
                     } else {
-                        Status.setText("No Balance ");
+                        Message=("No Balance ");
                     }
                 }
             }
             else{
-                Status.setText("Please enter correct ID");
+                Message=("Please enter correct ID");
             }
         } catch (Exception e) {
             e.printStackTrace();
         }
-
+        return Message;
     }
     @FXML
     void initialize() {

@@ -12,6 +12,8 @@ import java.sql.ResultSet;
 import java.sql.Statement;
 
 public class ShowBalanceController {
+    String AccountNumber;
+    String Message;
 
     @FXML
     private TextField AccountNumberText;
@@ -22,29 +24,31 @@ public class ShowBalanceController {
     @FXML
     private Button ShowBalanceButton;
 
-    public void BalanceMessageOnAction(ActionEvent e){
-        if (AccountNumberText.getText().isBlank()==false) {
+    public String BalanceMessageOnAction(){
+        if (AccountNumber.isBlank()==false) {
             ShowBalance();
         } else {
-            BalanceMessage.setText("please make sure you entered all data fields");
+            Message=("please make sure you entered all data fields");
         }
+        return Message;
     }
-    public void ShowBalance(){
+    public String ShowBalance(){
         DatabaseConnection connectNow= new DatabaseConnection();
         Connection connectDB=connectNow.getConnection();
         try{
-            if(AccountNumberText.getText().equals(LoginController.Flag)) {
-                        String Balance = "SELECT Balance FROM world.useraccount WHERE idUserAccount='" + AccountNumberText.getText() + "'";
+            if(AccountNumber.equals(LoginController.Flag)) {
+                        String Balance = "SELECT Balance FROM world.useraccount WHERE idUserAccount='" + AccountNumber+ "'";
                         Statement ss = connectDB.createStatement();
                         ResultSet r = ss.executeQuery(Balance);
                         r.next();
-                        BalanceMessage.setText(r.getString(1));
+                Message=(r.getString(1));
                     }
             else{
-                BalanceMessage.setText("Please enter correct ID");
+                Message=("Please enter correct ID");
             }
         } catch (Exception e){
             e.printStackTrace();
         }
+        return Message;
     }
 }

@@ -16,11 +16,15 @@ import javafx.stage.Stage;
 import java.io.IOException;
 import java.sql.Connection;
 import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.Objects;
 
 public class LoginController {
     static String Flag;
+    String Username;
+    String Password;
+    String Message;
 
     @FXML
     private Button CancelButton;
@@ -31,46 +35,43 @@ public class LoginController {
 
     @FXML
     private Label LoginMessage;
-    public void LoginMessageOnAction(ActionEvent e){
-        if (UsernameTextField.getText().isBlank()==false && PasswordTextField.getText().isBlank()==false){
+    public String LoginMessageOnAction()throws SQLException {
+        if (Username.isBlank()==false && Password.isBlank()==false){
             //LoginMessage.setText("please enter username and password");
             ValidateLogin();
 
         }
         else{
-            LoginMessage.setText("You cant login using blank data");
+            Message=("You cant login using blank data");
         }
+        return Message;
     }
-    public void ValidateLogin(){
+    public String ValidateLogin()throws SQLException{
         DatabaseConnection connectNow= new DatabaseConnection();
         Connection connectDB=connectNow.getConnection();
-        String VertifyLogin="SELECT count(1) FROM world.useraccount WHERE Username='"+UsernameTextField.getText()+
-                "' AND Password='"+PasswordTextField.getText()+"'";
+        String VertifyLogin="SELECT count(1) FROM world.useraccount WHERE Username='"+Username+
+                "' AND Password='"+Password+"'";
         try{
             Statement statement= connectDB.createStatement();
             ResultSet queryResult= statement.executeQuery(VertifyLogin);
             while (queryResult.next()){
                 if (queryResult.getInt(1)==1){
-                    String ID="SELECT idUserAccount FROM world.useraccount WHERE Username='"+UsernameTextField.getText()+"'";
+                    String ID="SELECT idUserAccount FROM world.useraccount WHERE Username='"+Username+"'";
                     Statement ss= connectDB.createStatement();
                     ResultSet r= ss.executeQuery(ID);
                     r.next();
                     Flag=r.getString(1);
-                    System.out.println(Flag);
-                    GoDashbaord();
-                    //try to male the account number valid acroos the procees
-                    //LoginMessage.setText("Welcome!");
-                    //dashbaordlogin();
+                    //GoDashbaord();
+                    Message="Welcome!";
                 }
                 else{
-                    LoginMessage.setText("Wrong Username Or password");
-
+                    Message="Wrong Username Or password";
                 }
             }
         } catch (Exception e){
             e.printStackTrace();
         }
-
+return Message;
     }
 
     @FXML

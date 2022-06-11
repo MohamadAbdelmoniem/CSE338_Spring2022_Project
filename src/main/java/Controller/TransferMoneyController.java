@@ -33,56 +33,53 @@ public class TransferMoneyController {
 
     @FXML
     private Label TransferMessage;
+    String FirstAccount1;
+    String SecondAccount1;
+    int Amount1;
+    String Date1;
+    String Description1;
+    String Massage;
 
+    public String TransferMessageOnAction() throws SQLException {
 
-    public void TransferMessageOnAction(ActionEvent e) throws SQLException {
-        String FirstAccount = AccountOneText.getText();
-        String SecondAccount = AccountTwoText.getText();
-        String Amount = AmountText.getText();
-        String Date = DateText.getText();
-        String Description = DescriptionText.getText();
-        if (FirstAccount.isBlank() == false || SecondAccount.isBlank() == false ||
-                Amount.isBlank() == false || Date.isBlank() == false) {
+        if (FirstAccount1.isBlank() == false && SecondAccount1.isBlank() == false && Date1.isBlank() == false) {
             ValidateTransfer();
         } else {
-            TransferMessage.setText("Enter all data fields");
+            Massage=("Enter all data fields");
         }
+        return Massage;
     }
     @FXML
     void TransferButtonOnAction(ActionEvent event) {
 
     }
-    public void ValidateTransfer()throws SQLException {
-        String FirstAccount = AccountOneText.getText();
-        String SecondAccount = AccountTwoText.getText();
-        int Amount = Integer.parseInt(AmountText.getText());
-        String Date = DateText.getText();
-        String Description = DescriptionText.getText();
-        if (FirstAccount.equals(LoginController.Flag)) {
-            String GetBalance1="Select Balance FROM useraccount where idUserAccount='"+FirstAccount+"'";
+    public String ValidateTransfer()throws SQLException {
+
+        if (FirstAccount1.equals(LoginController.Flag)) {
+            String GetBalance1="Select Balance FROM useraccount where idUserAccount='"+FirstAccount1+"'";
             Random rand = new Random();
             int maxNumber = 10000000;
             int randomNumber = rand.nextInt(maxNumber) + 1;
             DatabaseConnection connectNow = new DatabaseConnection();
             Connection connectDB = connectNow.getConnection();
             try {
-                String VertifyTransfer = "INSERT INTO world.transactions (`TransactionNumber`, `AccountNumber`, `FromToAccount`, `Amount`, `DebitCredit`, `Date`, `Description`) " + "VALUES ('" + randomNumber + "', '" + FirstAccount + "','" + SecondAccount + "','" + Amount + "','" + "D" + "','" + Date + "','" + Description + "')";
+                String VertifyTransfer = "INSERT INTO world.transactions (`TransactionNumber`, `AccountNumber`, `FromToAccount`, `Amount`, `DebitCredit`, `Date`, `Description`) " + "VALUES ('" + randomNumber + "', '" + FirstAccount1 + "','" + SecondAccount1 + "','" + Amount1 + "','" + "D" + "','" + Date1 + "','" + Description1 + "')";
                 Statement statement = connectDB.createStatement();
                 ResultSet queryResult = statement.executeQuery(GetBalance1);
                 while (queryResult.next()) {
-                    if (queryResult.getInt(1) > Amount) {
+                    if (queryResult.getInt(1) > Amount1) {
                         Statement ss = connectDB.createStatement();
                         ss.executeUpdate(VertifyTransfer);
-                        TransferMessage.setText("Validate");
+                        Massage=("Validate");
                         int Balance = queryResult.getInt(1);
-                        Balance -= Amount;
-                        String UpBalance = "UPDATE useraccount SET Balance='" + Balance + "'where idUserAccount='" + FirstAccount + "'";
+                        Balance -= Amount1;
+                        String UpBalance = "UPDATE useraccount SET Balance='" + Balance + "'where idUserAccount='" + FirstAccount1 + "'";
                         Statement s2 = connectDB.createStatement();
                         s2.executeUpdate(UpBalance);
                         queryResult.next();
                     }
                     else{
-                        TransferMessage.setText("No Balance");
+                        Massage=("No Balance");
                     }
                 }
             } catch (Exception e) {
@@ -91,13 +88,14 @@ public class TransferMoneyController {
         }
         else {
             try {
-                TransferMessage.setText("Wrong ID");
+                Massage=("Wrong ID");
             }
             catch (Exception e) {
                 e.printStackTrace();
             }
 
         }
+        return Massage;
     }
 
 }

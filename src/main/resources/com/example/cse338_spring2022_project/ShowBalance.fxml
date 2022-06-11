@@ -19,7 +19,7 @@
             <Font size="14.0" />
          </font>
       </Label>
-      <Label fx:id="BalanceMessage" layoutX="184.0" layoutY="78.0" prefHeight="17.0" prefWidth="187.0" textFill="#018005" />
+      <Label fx:id="BalanceMessage" layoutX="184.0" layoutY="78.0" prefHeight="17.0" prefWidth="214.0" textFill="#018005" />
       <Button fx:id="ShowBalanceButton" layoutX="182.0" layoutY="121.0" mnemonicParsing="false" onAction="#BalanceMessageOnAction" text="Check Balance" />
    </children>
 </AnchorPane>
